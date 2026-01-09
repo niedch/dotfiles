@@ -12,3 +12,7 @@ if [ -f '/Users/cn669600/glcoud/google-cloud-sdk/completion.zsh.inc' ]; then . '
 export ZVM_INSTALL="$HOME/.zvm/self"
 export PATH="$PATH:$HOME/.zvm/bin"
 export PATH="$PATH:$ZVM_INSTALL/"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/nic/.sdkman"
+[[ -s "/home/nic/.sdkman/bin/sdkman-init.sh" ]] && source "/home/nic/.sdkman/bin/sdkman-init.sh"
