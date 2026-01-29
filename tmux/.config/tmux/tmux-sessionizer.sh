@@ -6,7 +6,7 @@ else
   fzfdefault="${FZF_DEFAULT_OPTS}"
   export FZF_DEFAULT_OPTS=''
 
-  selected=$(find ~/projects ~/vaults -mindepth 1 -maxdepth 1 -type d | fzf --preview='mdless {}/Readme.md')
+  selected=$(find ~/projects -mindepth 1 -maxdepth 1 -type d | fzf --preview='bat {}/Readme.md')
   export FZF_DEFAULT_OPTS=$fzfdefault
 fi
 

@@ -8,7 +8,7 @@ return {
 			"nvim-treesitter/nvim-treesitter-textobjects",
 		},
 		config = function()
-			require("nvim-treesitter.config").setup({
+			require("nvim-treesitter.configs").setup({
 				auto_install = true,
 				highlight = { additional_vim_regex_highlighting = { "markdown" }, enable = true },
 				indent = { enable = true },

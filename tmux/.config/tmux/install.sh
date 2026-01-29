@@ -1,3 +1,2 @@
 #!/bin/bash
-
-sudo pacman -Sy --needed tmux mdless
+sudo pacman -Sy --needed tmux
