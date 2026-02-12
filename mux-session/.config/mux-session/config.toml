@@ -29,8 +29,22 @@ cmd = "vim ."
 
 [[project.window]]
 window_name = "tester"
+
+[[project.window.panel_config]]
+panel_direction = "h"
 cmd = "make test"
+
+[[project.window.panel_config]]
+panel_direction = "h"
+cmd = "btop"
 
 [[project.window]]
 window_name = "opencode"
 cmd = "opencode"
+
+[[project.window]]
+window_name = "Fetcher"
+cmd = """
+git fetch
+exit
+"""

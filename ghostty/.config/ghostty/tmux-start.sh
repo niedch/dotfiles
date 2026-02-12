@@ -12,6 +12,7 @@ if [ $? -eq 0 ]; then
 else
  # If the session doesn't exist, start a new one
  tmux new-session -s $SESSION_NAME -d
+ tmux send-keys -t $SESSION_NAME "ghostty +boo" enter
  tmux attach-session -t $SESSION_NAME
 fi
 

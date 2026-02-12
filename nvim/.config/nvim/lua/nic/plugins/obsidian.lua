@@ -16,8 +16,8 @@ return {
 			},
 			workspaces = {
 				{
-					name = "nic",
-					path = "~/vaults/nic",
+					name = "vault",
+					path = "~/projects/vault",
 				},
 			},
 			templates = {

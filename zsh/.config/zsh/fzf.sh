@@ -50,39 +50,3 @@ _fzf_complete_docker_post() {
 [ -n "$BASH" ] && complete -F _fzf_complete_docker -o default -o bashdefault docker
 #. ~/docker-fzf.sh
 #endregion
-
-#region Autocomplete toggle.sh
-fetch_feature_toggles() {
-  curl --request GET \
-  --silent \
-  --url http://localhost:8856/slm/webservice/v2.x/featuretoggle \
-  --header 'authorization: Basic c2xtYWRtaW46dzByayRoMHA=' \
-  --header 'user-agent: vscode-restclient' | jq -r '.QueryResult.Results[] | [.Name, .Description] | @tsv'
-}
-
-_fzf_complete_multi_toggle.sh() {
-  _fzf_complete --multi --reverse --header-lines=1 --preview 'echo {}' -- "$@" < <(
-    echo -e 'Toggle\tDescription'
-    fetch_feature_toggles
-  )
-}
-
-_fzf_complete_multi_toggle.sh_post() {
-  awk '{print $1}'
-}
-
-[ -n "$BASH" ] && complete -F _fzf_complete_multi_toggle -o default -o bashdefault multi_toggle.sh
-
-_fzf_complete_toggle.sh() {
-  _fzf_complete --reverse --header-lines=1 --preview 'echo {}' -- "$@" < <(
-    echo -e 'Toggle\tDescription'
-    fetch_feature_toggles
-  )
-}
-
-_fzf_complete_toggle.sh_post() {
-  awk '{print $1}'
-}
-
-[ -n "$BASH" ] && complete -F _fzf_complete_toggle -o default -o bashdefault toggle.sh
-#endregion
