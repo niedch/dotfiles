@@ -53,12 +53,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>db", "<cmd>:tabnew<CR><cmd>:DBUI<CR>")
 
-vim.keymap.set("n", "<leader>on", function ()
-  local test = vim.fn.input("Enter new inbox note name: ")
-  vim.cmd("!.bin/on.sh " .. test)
-end)
-
-vim.keymap.set("n", "<leader>ok", ":!mv '%:p' " .. vim.env.HOME .. "/vaults/nic/reviewed<cr>:bd<cr>")
 vim.keymap.set("n", "<C-w>z", "<cmd>silent :tabnew %<CR>")
 
 -- Debugging
@@ -77,7 +71,3 @@ vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>")
 vim.keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>")
 vim.keymap.set("n", '<leader>di', function() require "dap.ui.widgets".hover() end)
 vim.keymap.set("n", '<leader>d?', function() local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes) end)
-vim.keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
-vim.keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
-vim.keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({default_text=":E:"}) end)
-vim.keymap.set("n", '<leader>dtd', function() require('telescope.builtin').diagnostics({default_text=":E:"}) end)
