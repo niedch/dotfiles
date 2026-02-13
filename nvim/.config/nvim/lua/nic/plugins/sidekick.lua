@@ -23,6 +23,7 @@ return {
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
+  lazy = false,
   ---@class sidekick.Config
   opts = {
     cli = {
