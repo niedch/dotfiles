@@ -19,6 +19,5 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 echo "Installing zvm (Zig Version Manager)"
 curl https://raw.githubusercontent.com/tristanisham/zvm/master/install.sh | bash
 
-
 echo "Installing git wt (Git Worktree easymanagement)"
 go install github.com/k1LoW/git-wt@latest
