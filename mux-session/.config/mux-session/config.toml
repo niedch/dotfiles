@@ -1,4 +1,5 @@
 search_paths = [ "/home/nic/projects" ]
+preview_provider = "github"
 
 [default]
 [[default.window]]
@@ -8,9 +9,6 @@ cmd = "vim ."
 
 [[default.window]]
 window_name = "Runner"
-cmd = """
-lazydocker
-"""
 
 [[default.window]]
 window_name = "OpenCode"
@@ -32,7 +30,7 @@ window_name = "tester"
 
 [[project.window.panel_config]]
 panel_direction = "h"
-cmd = "make test"
+cmd = "just test"
 
 [[project.window.panel_config]]
 panel_direction = "h"

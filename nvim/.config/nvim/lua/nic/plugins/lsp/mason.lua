@@ -40,7 +40,8 @@ return {
 				"jdtls",
 				"vtsls",
         "typos_lsp",
-        "zls"
+        "zls",
+        "buf_ls"
 			},
 		})
 
