@@ -38,6 +38,6 @@ return {
       vim.cmd("!.bin/on.sh " .. test)
     end)
 
-    vim.keymap.set("n", "<leader>ok", ":!mv '%:p' " .. vim.env.HOME .. "/vaults/nic/reviewed<cr>:bd<cr>")
+    vim.keymap.set("n", "<leader>ok", ":!mv '%:p' " .. vim.env.HOME .. "/projects/vault/reviewed<cr>:bd<cr>")
   end,
 }
