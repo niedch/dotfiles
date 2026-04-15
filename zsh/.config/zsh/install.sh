@@ -21,3 +21,6 @@ curl https://raw.githubusercontent.com/tristanisham/zvm/master/install.sh | bash
 
 echo "Installing git wt (Git Worktree easymanagement)"
 go install github.com/k1LoW/git-wt@latest
+
+echo "Installing Git filter repo"
+sudo pacman -S git-filter-repo

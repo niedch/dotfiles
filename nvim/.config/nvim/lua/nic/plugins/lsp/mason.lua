@@ -41,7 +41,8 @@ return {
 				"vtsls",
         "typos_lsp",
         "zls",
-        "buf_ls"
+        "buf_ls",
+        "rust-analyser"
 			},
 		})
 
