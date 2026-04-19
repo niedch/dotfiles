@@ -17,7 +17,7 @@ return {
       workspaces = {
         {
           name = "vault",
-          path = "~/projects/vault",
+          path = "~/Projects/obsidian-vault",
         },
       },
       templates = {
