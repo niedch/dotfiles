@@ -1,3 +1,4 @@
 [tools]
+"github:niedch/comd" = "latest"
 node = "latest"
 
