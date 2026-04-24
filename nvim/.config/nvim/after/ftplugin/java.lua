@@ -79,7 +79,7 @@ local config = {
 					-- },
 					{
 						name = "JavaSE-20",
-						path = home .. "/.sdkman/candidates/java/21.0.5-tem",
+						path = home .. "/.local/share/mise/installs/java/temurin-21.0.5+11.0.LTS",
 					},
 				},
 			},
