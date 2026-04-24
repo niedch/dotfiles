@@ -42,7 +42,7 @@ return {
         "typos_lsp",
         "zls",
         "buf_ls",
-        "rust-analyser"
+        "rust_analyzer"
 			},
 		})
 
