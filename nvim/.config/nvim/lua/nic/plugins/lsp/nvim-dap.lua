@@ -106,7 +106,7 @@ return {
     vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
 
     -- Debugging
-    vim.keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+    vim.keymap.set("n", "<leader>bB", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
     vim.keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
     vim.keymap.set("n", "<leader>bl",
       "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
