@@ -1,4 +1,4 @@
-search_paths = [ "/home/nic/Projects" ]
+search_paths = [ "/home/nic/Projects", "/home/nic/Work_Repos" ]
 preview_provider = "readme"
 
 [default]
