@@ -63,25 +63,13 @@ local config = {
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 	settings = {
 		java = {
-			home = home .. "/.sdkman/candidates/java/21.0.5-amzn",
+			home = home .. "/.local/share/mise/installs/java/temurin-25.0.3+9.0.LTS",
 
 			eclipse = {
 				downloadSources = true,
 			},
 			configuration = {
-				updateBuildConfiguration = "interactive",
-				-- TODO Update this by adding any runtimes that you need to support your Java projects and removing any that you don't have installed
-				-- The runtime name parameters need to match specific Java execution environments.  See https://github.com/tamago324/nlsp-settings.nvim/blob/2a52e793d4f293c0e1d61ee5794e3ff62bfbbb5d/schemas/_generated/jdtls.json#L317-L334
-				runtimes = {
-					-- {
-					--   name = "JavaSE-20",
-					--   path = home .. "/.sdkman/candidates/java/21.0.5-amzn",
-					-- },
-					{
-						name = "JavaSE-20",
-						path = home .. "/.local/share/mise/installs/java/temurin-21.0.5+11.0.LTS",
-					},
-				},
+				updateBuildConfiguration = "automatic",
 			},
 			maven = {
 				downloadSources = true,

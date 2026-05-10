@@ -24,3 +24,9 @@ go install github.com/k1LoW/git-wt@latest
 
 echo "Installing Git filter repo"
 sudo pacman -S git-filter-repo
+
+echo "Setting git config"
+git config --global alias.lo 'forgit log'
+git config --global alias.ga 'forgit add'
+git config --global core.excludesFile '~/.config/zsh/gitignore-global'
+git config --global wt.basedir '../worktrees/{gitroot}'

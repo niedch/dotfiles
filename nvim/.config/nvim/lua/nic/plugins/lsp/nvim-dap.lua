@@ -90,6 +90,7 @@ return {
     -- Customize breakpoint signs
     vim.api.nvim_set_hl(0, "DapStoppedHl", { fg = "#98BB6C", bg = "#2A2A2A", bold = true })
     vim.api.nvim_set_hl(0, "DapStoppedLineHl", { bg = "#204028", bold = true })
+
     vim.fn.sign_define(
       "DapStopped",
       { text = "", texthl = "DapStoppedHl", linehl = "DapStoppedLineHl", numhl = "" }
@@ -106,7 +107,7 @@ return {
     vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" })
 
     -- Debugging
-    vim.keymap.set("n", "<leader>bB", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+    vim.keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
     vim.keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
     vim.keymap.set("n", "<leader>bl",
       "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
