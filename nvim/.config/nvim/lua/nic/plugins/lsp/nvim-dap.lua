@@ -150,10 +150,10 @@ return {
       host = "localhost",
       port = "${port}",
       executable = {
-        command = "/Users/cn669600/.nvm/versions/node/v20.18.0/bin/node",
+        command = "/home/nic/.local/share/mise/installs/node/latest/bin/node",
         -- 💀 Make sure to update this path to point to your installation
         args = {
-          "/Users/cn669600/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+          "/home/nic/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
           "${port}",
         },
       },
@@ -167,6 +167,26 @@ return {
         program = "${file}",
         cwd = "${workspaceFolder}",
       },
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Debug Vitest (current file)",
+        runtimeExecutable = "${workspaceFolder}/node_modules/.bin/vitest",
+        runtimeArgs = { "run", "${file}", "--no-coverage" },
+        cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
+        internalConsoleOptions = "neverOpen",
+      },
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Debug Playwright (current file)",
+        runtimeExecutable = "${workspaceFolder}/node_modules/.bin/playwright",
+        runtimeArgs = { "test", "${file}", "--project=ui" },
+        cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
+        internalConsoleOptions = "neverOpen",
+      },
     }
 
     dap.configurations.typescript = {
@@ -177,13 +197,32 @@ return {
         program = "${file}",
         cwd = "${workspaceFolder}",
       },
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Debug Vitest (current file)",
+        runtimeExecutable = "${workspaceFolder}/node_modules/.bin/vitest",
+        runtimeArgs = { "run", "${file}", "--no-coverage" },
+        cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
+        internalConsoleOptions = "neverOpen",
+      },
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Debug Playwright (current file)",
+        runtimeExecutable = "${workspaceFolder}/node_modules/.bin/playwright",
+        runtimeArgs = { "test", "${file}", "--project=ui" },
+        cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
+        internalConsoleOptions = "neverOpen",
+      },
     }
 
     dap.configurations.cucumber = {
       {
         type = "pwa-node",
         request = "launch",
-        runtimeExecutable = "${env:HOME}/.nvm/versions/node/v20.18.0/bin/node",
         name = "Current Feature File",
         cwd = "${workspaceFolder}",
         program = "./node_modules/.bin/cucumber-js",
