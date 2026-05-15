@@ -189,6 +189,38 @@ return {
       },
     }
 
+    dap.adapters["pwa-chrome"] = {
+      type = "server",
+      host = "localhost",
+      port = "${port}",
+      executable = {
+        command = "/home/nic/.local/share/mise/installs/node/latest/bin/node",
+        args = {
+          "/home/nic/.local/share/nvim/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+          "${port}",
+        },
+      },
+    }
+
+    dap.configurations.typescriptreact = {
+      {
+        type = "pwa-chrome",
+        request = "launch",
+        name = "Launch Chrome",
+        url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}",
+        sourceMaps = true,
+        protocol = "inspector",
+      },
+      {
+        type = "pwa-chrome",
+        request = "attach",
+        name = "Attach Chrome",
+        port = 9222,
+        webRoot = "${workspaceFolder}",
+      },
+    }
+
     dap.configurations.typescript = {
       {
         type = "pwa-node",
