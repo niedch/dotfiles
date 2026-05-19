@@ -2,6 +2,7 @@ return {
   {"folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
@@ -12,13 +13,18 @@ return {
     notifier = { enabled = false },
       picker = {
         enabled = true,
-        layout = "ivy"
+        layout = "ivy",
+        sources = {
+          explorer = {
+            ignored = true,
+          },
+        },
       },
     quickfile = { enabled = true },
     scope = { enabled = false },
     scroll = { enabled = false },
     statuscolumn = { enabled = false },
-    words = { enabled = false },
+    words = { enabled = true },
     styles = {
       notification = {
         -- wo = { wrap = true } -- Wrap notifications
