@@ -5,8 +5,8 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = false },
-    explorer = { enabled = false },
+    dashboard = { enabled = true },
+    explorer = { enabled = true },
     indent = { enabled = false },
     input = { enabled = false },
     notifier = { enabled = false },
@@ -91,6 +91,7 @@ return {
     { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
     { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
     { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+      {"<C-n>",     function() Snacks.explorer.open() end, desc = "Opens Explorer", mode = {"n"}},
   },
     init = function()
       local function get_visual_selection()
