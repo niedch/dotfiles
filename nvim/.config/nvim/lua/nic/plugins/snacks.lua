@@ -17,6 +17,17 @@ return {
         sources = {
           explorer = {
             ignored = true,
+            layout = {
+              hidden = { "input" },
+              auto_hide = { "input" },
+            },
+            win = {
+              list = {
+                keys = {
+                  ["<C-n>"] = "close",
+                },
+              },
+            },
           },
         },
       },
@@ -24,7 +35,7 @@ return {
     scope = { enabled = false },
     scroll = { enabled = false },
     statuscolumn = { enabled = false },
-    words = { enabled = true },
+    words = { enabled = false },
     styles = {
       notification = {
         -- wo = { wrap = true } -- Wrap notifications
@@ -35,8 +46,6 @@ return {
     -- Top Pickers & Explorer
     { "<leader><space>", function() Snacks.picker.smart({filter = { cwd = true}}) end, desc = "Smart Find Files" },
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
-    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
     -- find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
@@ -97,7 +106,7 @@ return {
     { "<c-_>",      function() Snacks.terminal() end, desc = "which_key_ignore" },
     { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
     { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-      {"<C-n>",     function() Snacks.explorer.open() end, desc = "Opens Explorer", mode = {"n"}},
+      {"<C-n>",     function() local exp = Snacks.picker.get({ source = "explorer" })[1]; if exp then exp:close() else Snacks.explorer.open() end end, desc = "Toggle Explorer", mode = {"n"}},
   },
     init = function()
       local function get_visual_selection()
