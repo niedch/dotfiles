@@ -4,7 +4,7 @@
   "position": "top",
   "spacing": 0,
   "height": 26,
-  "modules-left": ["custom/omarchy", "hyprland/workspaces", "mpris"],
+  "modules-left": ["custom/omarchy", "hyprland/workspaces", "mpris", "custom/cava"],
   "modules-center": ["clock", "custom/weather", "custom/update", "custom/voxtype", "custom/screenrecording-indicator", "custom/idle-indicator", "custom/notification-silencing-indicator"],
   "modules-right": [
     "group/tray-expander",
@@ -166,12 +166,16 @@
     "signal": 9,
     "return-type": "json"
   },
+  "custom/cava": {
+    "format": "{}",
+    "exec": "~/.config/waybar/cava.sh",
+    "tooltip": false
+  },
   "mpris": {
     "format": " {dynamic}",
     "format-paused": "{status_icon} {dynamic}",
     "interval": 5,
     "dynamic-order": ["artist", "title"],
-    // "tooltip-format": "{player} ({status}):\n{artist} - {title}",
     "status-icons": {
       "paused": "󰝛"
     },
