@@ -182,8 +182,8 @@
     "dynamic-order": ["artist", "title"],
     "status-icons": {
       "paused": "󰝛"
-    }
-    // "ignored-players": ["chromium"]
+    },
+    "max-length": 30
   },
   "custom/notification-silencing-indicator": {
     "on-click": "omarchy-toggle-notification-silencing",
