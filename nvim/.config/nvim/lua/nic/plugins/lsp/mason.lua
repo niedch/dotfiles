@@ -44,7 +44,8 @@ return {
         "zls",
         "buf_ls",
         "rust_analyzer",
-        "yamlls"
+        "yamlls",
+        "jsonls",
 			},
 		})
 
