@@ -1,18 +1,24 @@
 return {
-	{
-		"rest-nvim/rest.nvim",
-	   ft = "http",
-		config = function()
-			require("rest-nvim").setup({
-
-	     })
-			vim.keymap.set("n", "<leader>mh", "<cmd>Rest run<cr>", {})
-			vim.keymap.set("n", "<leader>mi", "<cmd>Rest open<cr>", {})
-		end,
-	   opts = {
-	     rocks = {
-	       enabled = false
-	     }
-	   }
-	},
+  {
+    "mistweaverco/kulala.nvim",
+    keys = {
+      { "<leader>mh", function() require("kulala").run() end, desc = "Send request", mode = {"n", "v"} },
+      { "<leader>mH", function() require("kulala").run_all() end, desc = "Send all requests", mode = {"n", "v"} },
+    },
+    ft = {"http", "rest"},
+    opts = {
+      global_keymaps = true,
+      kulala_keymaps = {
+        ["Show verbose"] = { "gV", function() require("kulala.ui").show_verbose() end },
+      },
+      ui = {
+        win_opts = {
+          wo = {
+            foldenable = false,
+            foldmethod = "manual",
+          },
+        },
+      },
+    },
+  },
 }
