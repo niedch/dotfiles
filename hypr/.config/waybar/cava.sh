@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 set -u
+
+# Kill leftover processes from previous waybar sessions
+for pid in $(pgrep -f "cava.*waybar_cava_config"); do
+    [ "$pid" != "$$" ] && kill "$pid" 2>/dev/null
+done
+
 bars=(⠀ ⠁ ⠃ ⠇ ⠏ ⠟ ⠿ ⣿)
 config_file="/tmp/waybar_cava_config"
+fifo="/tmp/waybar_cava_fifo"
+
 cat > "$config_file" <<EOF
 [general]
 bars = 8
@@ -18,7 +26,20 @@ channels = mono
 mono_option = average
 EOF
 
-trap 'kill 0 2>/dev/null || true' EXIT
+cleanup() {
+    pkill -P $$ 2>/dev/null        # kill children
+    kill "$CAVA_PID" 2>/dev/null   # kill cava explicitly
+    rm -f "$fifo"
+    exit 0
+}
+trap cleanup EXIT SIGTERM SIGINT
+
+rm -f "$fifo"
+mkfifo "$fifo"
+
+cava -p "$config_file" 2>/dev/null > "$fifo" &
+CAVA_PID=$!
+
 pause_start=0
 
 convert_to_bars() {
@@ -29,7 +50,6 @@ convert_to_bars() {
     local out=""
     local n
     for n in "${nums[@]}"; do
-
         if (( n < 0 || n > 7 )); then
             n=0
         fi
@@ -38,22 +58,16 @@ convert_to_bars() {
     printf '%s\n' "$out"
 }
 
-# fast check for "only zeros" (silence) using parameter expansion — no regex, no external tools
 is_silence() {
-    local l="${1//;/}"   # remove semicolons
-    # remove all 0 characters; if result is empty => only zeros
+    local l="${1//;/}"
     [[ -z "${l//0/}" ]]
 }
 
-# Run cava and process its stdout
-cava -p "$config_file" 2>/dev/null | while IFS= read -r line || [[ -n "$line" ]]; do
-    # silence detection (cheap)
+while IFS= read -r line || [[ -n "$line" ]]; do
     if is_silence "$line"; then
         if (( pause_start == 0 )); then
             pause_start=$SECONDS
         fi
-
-        # hide after 2 seconds of continuous silence
         if (( SECONDS - pause_start >= 2 )); then
             echo ""
         else
@@ -61,8 +75,6 @@ cava -p "$config_file" 2>/dev/null | while IFS= read -r line || [[ -n "$line" ]]
         fi
         continue
     fi
-
-    # audio returned — reset timer and print bars
     pause_start=0
     convert_to_bars "$line"
-done
+done < "$fifo"
