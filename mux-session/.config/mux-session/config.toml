@@ -1,5 +1,5 @@
-search_paths = [ "/home/nic/Projects", "/home/nic/Work_Repos" ]
-preview_provider = "readme"
+search_paths = [ "/home/nic/Projects", "/home/nic/Work_Repos", "/home/nic/Archive" ]
+preview_provider = "github"
 
 [default]
 [[default.window]]
