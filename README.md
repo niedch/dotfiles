@@ -7,6 +7,7 @@ My personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/)
 - **ghostty** - Terminal emulator configuration
 - **hypr** - Hyprland (Wayland compositor) config
 - **mux-session** - Session management for tmux/terminal
+- **mise** - Dev Package management for terminal
 - **nvim** - Neovim configuration
 - **tmux** - Terminal multiplexer config
 - **zsh** - Zsh shell configuration
@@ -23,9 +24,9 @@ My personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/)
    brew install stow
    ```
 
-2. Clone this repo to `~/.dotfiles`:
+2. Clone this repo to `~/Projects/dotfiles`:
    ```bash
-   git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
+   git clone https://github.com/niedch/dotfiles.git ~/Projects/dotfiles
    ```
 
 3. Run the install script:
