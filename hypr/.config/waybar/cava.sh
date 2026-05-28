@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 set -u
 
-# Kill leftover processes from previous waybar sessions
-for pid in $(pgrep -f "cava.*waybar_cava_config"); do
-    [ "$pid" != "$$" ] && kill "$pid" 2>/dev/null
-done
+CONFIG_FILE="/tmp/waybar_cava_config"
+LOCK_DIR="/tmp/waybar_cava.lock"
+FIFO_0="/tmp/waybar_cava_fifo_0"
+FIFO_1="/tmp/waybar_cava_fifo_1"
 
 bars=(⠀ ⠁ ⠃ ⠇ ⠏ ⠟ ⠿ ⣿)
-config_file="/tmp/waybar_cava_config"
-fifo="/tmp/waybar_cava_fifo"
 
-cat > "$config_file" <<EOF
+if mkdir "$LOCK_DIR" 2>/dev/null; then
+    IS_PRIMARY=1
+    echo "$$" > "$LOCK_DIR/pid"
+
+    cat > "$CONFIG_FILE" <<'CAVA_EOF'
 [general]
-bars = 8
-framerate = 30
+bars = 6
+framerate = 20
 autosens = 1
 reverse = 1
+rate = 22050
+noise_reduction = 0.77
 
 [output]
 method = raw
@@ -24,23 +28,33 @@ data_format = ascii
 ascii_max_range = 7
 channels = mono
 mono_option = average
-EOF
+CAVA_EOF
 
-cleanup() {
-    pkill -P $$ 2>/dev/null        # kill children
-    kill "$CAVA_PID" 2>/dev/null   # kill cava explicitly
-    rm -f "$fifo"
-    exit 0
-}
-trap cleanup EXIT SIGTERM SIGINT
+    rm -f "$FIFO_0" "$FIFO_1"
+    mkfifo "$FIFO_0" "$FIFO_1"
 
-rm -f "$fifo"
-mkfifo "$fifo"
+    cleanup() {
+        pkill -P $$ 2>/dev/null
+        kill "$CAVA_PID" 2>/dev/null
+        rm -f "$FIFO_0" "$FIFO_1" "$CONFIG_FILE"
+        rm -rf "$LOCK_DIR"
+        exit 0
+    }
+    trap cleanup EXIT SIGTERM SIGINT
 
-cava -p "$config_file" 2>/dev/null > "$fifo" &
-CAVA_PID=$!
+    cava -p "$CONFIG_FILE" 2>/dev/null \
+        | tee >(cat > "$FIFO_0") >(cat > "$FIFO_1") > /dev/null &
+    CAVA_PID=$!
 
-pause_start=0
+    MY_FIFO="$FIFO_0"
+else
+    IS_PRIMARY=0
+
+    cleanup() { exit 0; }
+    trap cleanup EXIT SIGTERM SIGINT
+
+    MY_FIFO="$FIFO_1"
+fi
 
 convert_to_bars() {
     local line="$1"
@@ -63,6 +77,16 @@ is_silence() {
     [[ -z "${l//0/}" ]]
 }
 
+while [ ! -p "$MY_FIFO" ]; do
+    if [ "$IS_PRIMARY" = 0 ]; then
+        ppid=$(cat "$LOCK_DIR/pid" 2>/dev/null) || { sleep 0.1; continue; }
+        kill -0 "$ppid" 2>/dev/null || exit 1
+    fi
+    sleep 0.1
+done
+
+pause_start=0
+
 while IFS= read -r line || [[ -n "$line" ]]; do
     if is_silence "$line"; then
         if (( pause_start == 0 )); then
@@ -77,4 +101,4 @@ while IFS= read -r line || [[ -n "$line" ]]; do
     fi
     pause_start=0
     convert_to_bars "$line"
-done < "$fifo"
+done < "$MY_FIFO"
