@@ -1,0 +1,20 @@
+[Unit]
+Description=rclone mount gdrive
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/rclone mount gdrive:/Documents /home/nic/Documents/gdrive \
+  --vfs-cache-mode full \
+  --vfs-cache-max-age 72h \
+  --vfs-cache-max-size 10G \
+  --dir-cache-time 72h \
+  --log-level INFO \
+  --log-file /home/nic/.local/state/rclone/gdrive.log
+ExecStop=/bin/fusermount -u /home/nic/Documents/gdrive
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
